@@ -60,7 +60,7 @@ func PatchFile(fName string) {
 	// close srcFile on exit and check for its returned error
 	defer func() {
 		if err := srcFile.Close(); err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 	}()
 
@@ -93,7 +93,7 @@ func PatchFile(fName string) {
 		// close newFile on exit and check for its returned error
 		defer func() {
 			if err := newFile.Close(); err != nil {
-				panic(err)
+				log.Fatal(err)
 			}
 		}()
 
@@ -104,12 +104,12 @@ func PatchFile(fName string) {
 		//TODO use for loop to read file by small buffer.
 		n, err := srcFile.Read(buf)
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 
 		// write a chunk
 		if _, err := newFile.Write(buf[:n]); err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 
 		log.Println("The srcFile has been patched successfully.", fName)
