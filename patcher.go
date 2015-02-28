@@ -15,6 +15,10 @@ import (
 	"strings"
 )
 
+const (
+	FILE_EXT = ".mp4"
+)
+
 func main() {
 	argsWithoutProg := os.Args[1:]
 	if len(argsWithoutProg) <= 0 {
@@ -27,6 +31,7 @@ func main() {
 		return
 	}
 
+	//process directory
 	if target.IsDir() {
 		files, _ := ioutil.ReadDir(argsWithoutProg[0])
 		for _, file := range files {
@@ -34,13 +39,13 @@ func main() {
 				continue
 			} else {
 				filePath := path.Join(argsWithoutProg[0], file.Name())
-				if path.Ext(filePath) == ".mp4" {
+				if path.Ext(filePath) == FILE_EXT {
 					PatchFile(filePath)
 				}
 			}
 		}
 	} else {
-		if path.Ext(argsWithoutProg[0]) == ".mp4" {
+		if path.Ext(argsWithoutProg[0]) == FILE_EXT {
 			PatchFile(argsWithoutProg[0])
 		}
 	}
