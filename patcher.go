@@ -8,6 +8,8 @@ package main
 
 import (
 	"fmt"
+	"github.com/cheggaaa/pb"
+	"io"
 	"io/ioutil"
 	"log"
 	"os"
@@ -16,7 +18,8 @@ import (
 )
 
 const (
-	FILE_EXT = ".mp4"
+	FILE_EXT    = ".mp4"
+	FILE_BUFFER = 1024
 )
 
 func main() {
@@ -82,7 +85,7 @@ func PatchFile(fName string) {
 
 		// equivalent to Python's `if os.path.exists(filename)`
 		if _, err := os.Stat(newFileName); err == nil {
-			log.Println("Patched file exists.", newFileName)
+			//log.Println("Patched file exists.", newFileName)
 			return
 		}
 		newFile, err := os.Create(newFileName)
@@ -99,20 +102,33 @@ func PatchFile(fName string) {
 
 		newFile.Write(data)
 		// make a buffer to keep chunks that are read
-		buf := make([]byte, srcFileSize-16)
+		buf := make([]byte, FILE_BUFFER)
 		srcFile.Seek(8, 0)
-		//TODO use for loop to read file by small buffer.
-		n, err := srcFile.Read(buf)
-		if err != nil {
-			log.Fatal(err)
-		}
+		bar := pb.StartNew(int(srcFileSize) - 8)
+		bar.ShowCounters = false
+		var readLength int64 = 0
+		for {
+			n, err := srcFile.Read(buf)
+			readLength += int64(n)
 
-		// write a chunk
-		if _, err := newFile.Write(buf[:n]); err != nil {
-			log.Fatal(err)
-		}
+			if err != nil && err != io.EOF {
+				log.Fatal(err)
+			}
 
-		log.Println("The srcFile has been patched successfully.", fName)
+			if n == 0 {
+				break
+			}
+
+			if readLength >= (srcFileSize - 8) {
+				n = n - 8
+			}
+			bar.Add(n)
+			// write a chunk
+			if _, err := newFile.Write(buf[:n]); err != nil {
+				log.Fatal(err)
+			}
+		}
+		bar.FinishPrint("The srcFile" + fName + " has been patched successfully.")
 	} else {
 		log.Println("The file dose not need to patch.", fName)
 	}
