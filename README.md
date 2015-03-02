@@ -6,3 +6,7 @@
 
 1. 修复从手机端导出的缓存优酷MP4文件只能在优酷播放器播放的问题; 
 2. 修复后的MP4文件可以在任意播放器里播放.
+
+**测试**：MAC和windows 我都测试过了，编译后可以正常处理文件。以下是在windows下的输出截图
+
+![demo](https://github.com/Hell0wor1d/youkuMP4Patcher/blob/master/demo.png?raw=true)
