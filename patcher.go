@@ -128,7 +128,7 @@ func PatchFile(fName string) {
 				log.Fatal(err)
 			}
 		}
-		bar.FinishPrint("The srcFile" + fName + " has been patched successfully.")
+		bar.FinishPrint("The srcFile " + fName + " has been patched successfully.")
 	} else {
 		log.Println("The file dose not need to patch.", fName)
 	}
