@@ -25,7 +25,7 @@ const (
 func main() {
 	argsWithoutProg := os.Args[1:]
 	if len(argsWithoutProg) <= 0 {
-		fmt.Println("Please input a directory or file path.")
+		fmt.Println("Please input a directory or file path.\r\nroot@kev7n.com")
 		return
 	}
 	target, err := os.Stat(argsWithoutProg[0])

@@ -10,3 +10,9 @@
 **测试**：MAC和windows我都测试过了，编译后可以正常处理文件。以下是在windows下的输出截图
 
 ![demo](https://github.com/Hell0wor1d/youkuMP4Patcher/blob/master/demo.png?raw=true)
+
+以下是在Mac下测试截图
+
+![demo](https://github.com/Hell0wor1d/youkuMP4Patcher/blob/master/mac.png?raw=true)
+
+
