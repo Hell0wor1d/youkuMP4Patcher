@@ -13,7 +13,7 @@
 
 ![mac](https://github.com/Hell0wor1d/youkuMP4Patcher/blob/master/mac.png?raw=true)
 
-Mac和windows我都测试过
+windows
 
 ![windows](https://github.com/Hell0wor1d/youkuMP4Patcher/blob/master/demo.png?raw=true)
 
